@@ -1,14 +1,15 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include "boo_car.h"
-
+#include<stdbool.h>
 
 //prototypes
 book* libr(int);
 void print(book*, int);
 void A_search(book*, int);
 car* garage(int);
-void console( car* cars, int s);
+void console( car*, int);
+bool str_CH(char*, char*);
 
 int main()
 {
@@ -42,29 +43,40 @@ car* garage(int s)
 
 void console( car* cars, int s)
 {
-	char merc[7] = "merc";
+	char* merc = "merc";
 
 	for(int i = 0; i < s; ++i)
 	{
-		for(int j = 0; cars[i].brend[j] != '\0'; ++j)
+	
+		if(str_CH(cars[i].brend, merc))
 		{
-
-			
-			if(merc[j] == '\0')
-			{
-				printf("this cars are MERSEDES\n");
-
-				printf(" %d\n", cars[i].year);
-			}
-			 if(cars[i].brend[j] != merc[j])
-                        {
-                                break;
-                        }
-
+			printf("car produced in %d year is a mercedes\n", cars[i].year);
 		}
 
 	}	
 }
+
+bool str_CH(char* str1, char* str2)
+{
+	int i = 0;
+
+	while(str1[i] != '\0')
+	{
+		while(str2[i] !='\0')
+		{
+			if(str1[i] == str2[i])
+			{
+				++i;
+			}else {
+				return 0;
+			}
+			++i;
+		}	
+		return 1;	
+	}
+	return 0;
+}
+
 book* libr(int s){
     book* books = (book*) malloc(sizeof(book) * s);
     for(int i = 0; i < s; ++i)
@@ -78,6 +90,7 @@ book* libr(int s){
     }
     return books;
 }
+
 
 void A_search(book* books, int s)
 {
